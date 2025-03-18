@@ -8,7 +8,8 @@ import { resolve } from 'path';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
-function gatherReleaseInfo(logPath, version) {
+function gatherReleaseInfo(project, version) {
+  const logPath = resolve(`./libs/${project}/CHANGELOG.md`);
   const changeLogs = readFileSync(logPath, 'utf8');
   const regex = /## ([0-9]+(\.[0-9]+)+)\s\([0-9]{4}-[0-9]{2}-[0-9]{2}\)/i;
 
@@ -48,7 +49,7 @@ function gatherReleaseInfo(logPath, version) {
     );
   }
 
-  console.log('Gathered release info...');
+  console.log(`Gathered release info for ${project}...`);
   return releaseInfo;
 }
 
@@ -62,11 +63,14 @@ async function publishToGithub(releaseInfo, version, project) {
     repo: 'dapp',
     tag_name: `${project}/${version}`,
     body: releaseInfo,
-  }).catch((err) => {
-    core.setFailed(err);
-  });
-
-  console.log(`Published to Github: ${project}/${version}`);
+  })
+    .then(() => {
+      console.log(`Published to Github: ${project}/${version}`);
+    })
+    .catch((err) => {
+      core.setFailed(err);
+      throw err;
+    });
 }
 
 (async () => {
@@ -101,8 +105,6 @@ async function publishToGithub(releaseInfo, version, project) {
     .parseAsync();
 
   for (const project of options.projects) {
-    const logPath = resolve(`./libs/${project}/CHANGELOG.md`);
-
     // Read the version from the package.json
     const packageJson = readFileSync(
       resolve(`./dist/libs/${project}/package.json`),
@@ -110,7 +112,7 @@ async function publishToGithub(releaseInfo, version, project) {
     );
     const version = JSON.parse(packageJson).version;
 
-    const releaseInfo = gatherReleaseInfo(logPath, version);
+    const releaseInfo = gatherReleaseInfo(project, version);
 
     await publishToGithub(releaseInfo, version, project);
   }
@@ -124,4 +126,7 @@ async function publishToGithub(releaseInfo, version, project) {
   });
 
   process.exit(0);
-})();
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
