@@ -24,7 +24,11 @@ runs:
     - name: Run gh-release-script.js
       shell: bash
       working-directory: ${{ github.workspace }}
-      run: node ${{ github.action_path }}/gh-release-script.js --projects ${{ inputs.projects }} --repo ${{ github.repository }} --owner ${{ github.repository_owner }}
+      run: |
+        node ${{ github.action_path }}/gh-release-script.js \
+          --projects ${{ inputs.projects }} \
+          --repo ${{ github.event.repository.name }} \
+          --owner ${{ github.repository_owner }}
       env:
         GITHUB_TOKEN: ${{ inputs.gh-token }}
         NODE_AUTH_TOKEN: ${{ inputs.npm-token }}
