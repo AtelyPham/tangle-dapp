@@ -14,13 +14,13 @@
     "tangle-ui-component-library",
     "dApp"
   ],
-  "homepage": "https://github.com/atelypham/tangle-dapp/tree/develop/libs/ui-components#readme",
-  "bugs": "https://github.com/atelypham/tangle-dapp/issues/new/choose",
+  "homepage": "https://github.com/AtelyPham/tangle-dapp/tree/develop/libs/ui-components#readme",
+  "bugs": "https://github.com/AtelyPham/tangle-dapp/issues/new/choose",
   "license": "Apache-2.0",
   "author": "Tangle Developers",
   "repository": {
     "type": "git",
-    "url": "https://github.com/atelypham/tangle-dapp"
+    "url": "https://github.com/AtelyPham/tangle-dapp"
   },
   "publishConfig": {
     "access": "public"
