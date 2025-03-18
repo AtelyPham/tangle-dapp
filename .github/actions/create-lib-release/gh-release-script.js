@@ -53,14 +53,14 @@ function gatherReleaseInfo(project, version) {
   return releaseInfo;
 }
 
-async function publishToGithub(releaseInfo, version, project) {
+async function publishToGithub(releaseInfo, version, project, repo, owner) {
   await request('POST /repos/{owner}/{repo}/releases', {
     headers: {
       authorization: `token ${process.env.GITHUB_TOKEN}`,
     },
-    owner: 'AtelyPham',
+    owner,
     name: `[${version}] ${project}`,
-    repo: 'tangle-dapp',
+    repo,
     tag_name: `${project}/${version}`,
     body: releaseInfo,
   })
@@ -75,32 +75,21 @@ async function publishToGithub(releaseInfo, version, project) {
 
 (async () => {
   const options = await yargs(hideBin(process.argv))
-    .option('dryRun', {
-      alias: 'd',
-      description:
-        'Whether or not to perform a dry-run of the release process, defaults to true',
-      type: 'boolean',
-      default: false,
-    })
-    .option('verbose', {
-      alias: 'v',
-      description:
-        'Whether or not to enable verbose logging, defaults to false',
-      type: 'boolean',
-      default: false,
-    })
     .option('projects', {
       description: 'Projects to publish',
       type: 'string',
       array: true,
       demandOption: true,
     })
-    .option('firstRelease', {
-      alias: 'first-release',
-      description:
-        'Whether or not to perform a first release, defaults to false',
-      type: 'boolean',
-      default: false,
+    .option('repo', {
+      description: 'Repository name',
+      type: 'string',
+      demandOption: true,
+    })
+    .option('owner', {
+      description: 'Repository owner',
+      type: 'string',
+      demandOption: true,
     })
     .parseAsync();
 
@@ -114,14 +103,17 @@ async function publishToGithub(releaseInfo, version, project) {
 
     const releaseInfo = gatherReleaseInfo(project, version);
 
-    await publishToGithub(releaseInfo, version, project);
+    await publishToGithub(
+      releaseInfo,
+      version,
+      project,
+      options.repo,
+      options.owner,
+    );
   }
 
   await releasePublish({
     projects: options.projects,
-    dryRun: options.dryRun,
-    verbose: options.verbose,
-    firstRelease: options.firstRelease,
     outputStyle: 'static',
   });
 

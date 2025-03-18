@@ -89,9 +89,8 @@ jobs:
         shell: bash
 
       - name: Publish libraries
-        run: yarn publish:libs --projects $LIBS_TO_PUBLISH
-        shell: bash
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+        uses: ./.github/actions/create-lib-release
+        with:
+          projects: $LIBS_TO_PUBLISH
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          npm-token: ${{ secrets.NPM_ACCESS_TOKEN }}
