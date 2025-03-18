@@ -1,3 +1,19 @@
+## 0.0.2 (2025-03-18)
+
+### 🩹 Fixes
+
+- **tools:** Fix incorrect package root ([a7ea772d](https://github.com/AtelyPham/tangle-dapp/commit/a7ea772d))
+
+### 🏡 Chore
+
+- **tools:** Add first release flag ([b09afc7a](https://github.com/AtelyPham/tangle-dapp/commit/b09afc7a))
+- **tools:** Update info inside ui-components package.json ([f9064dcc](https://github.com/AtelyPham/tangle-dapp/commit/f9064dcc))
+- **tools:** Update info inside ui-components package.json ([33deeaae](https://github.com/AtelyPham/tangle-dapp/commit/33deeaae))
+
+### ❤️ Thank You
+
+- Trung-Tin Pham @AtelyPham
+
 ## 0.0.1 (2025-03-18)
 
 ### 🚀 Features
