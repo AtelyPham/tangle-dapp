@@ -8,9 +8,6 @@ on:
     paths:
       - 'libs/**/CHANGELOG.md'
 
-    paths-ignore:
-      - '.github/workflows/**'
-
   workflow_dispatch:
 
 jobs:
@@ -35,10 +32,6 @@ jobs:
     permissions:
       contents: read
       id-token: write
-
-    if: ( !startsWith(github.event.head_commit.message, '[SKIP CI]') &&
-      startsWith(github.event.head_commit.message, '[RELEASE]') &&
-      github.repository == 'tangle-network/dapp' )
 
     steps:
       - name: 'Checkout'
