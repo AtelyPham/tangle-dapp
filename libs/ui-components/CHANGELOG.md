@@ -1,3 +1,13 @@
+## 0.0.3 (2025-03-18)
+
+### 🏡 Chore
+
+- **tools:** Move package root target defaults ([da9050bd](https://github.com/AtelyPham/tangle-dapp/commit/da9050bd))
+
+### ❤️ Thank You
+
+- Trung-Tin Pham @AtelyPham
+
 ## 0.0.2 (2025-03-18)
 
 ### 🩹 Fixes
