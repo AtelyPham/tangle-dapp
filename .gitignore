@@ -101,3 +101,6 @@ libs/tangle-shared-ui/src/graphql/
 libs/tangle-shared-ui/schema.graphql
 
 vitest.config.*.timestamp*
+
+# OS files
+._*
