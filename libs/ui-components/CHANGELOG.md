@@ -7,7 +7,7 @@
 - **tangle-cloud:** building UI deployer home page ([#2874](https://github.com/AtelyPham/tangle-dapp/pull/2874))
 - **tangle-cloud:** implement operator home page ([#2858](https://github.com/AtelyPham/tangle-dapp/pull/2858))
 - **tangle-cloud:** Implement home page stats cards ([#2848](https://github.com/AtelyPham/tangle-dapp/pull/2848))
-- migrate cloud to vite ([#2819](https://github.com/AtelyPham/tangle-dapp/pull/2819))
+- Migrate cloud to vite ([#2819](https://github.com/AtelyPham/tangle-dapp/pull/2819))
 
 ### 🩹 Fixes
 

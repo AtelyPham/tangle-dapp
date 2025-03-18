@@ -112,12 +112,14 @@ async function publishToGithub(releaseInfo, version, project, repo, owner) {
     );
   }
 
-  await releasePublish({
+  const publishResults = await releasePublish({
     projects: options.projects,
     outputStyle: 'static',
   });
 
-  process.exit(0);
+  process.exit(
+    Object.values(publishResults).every((result) => result.code === 0) ? 0 : 1,
+  );
 })().catch((err) => {
   console.error(err);
   process.exit(1);
