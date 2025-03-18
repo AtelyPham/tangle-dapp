@@ -115,6 +115,7 @@ async function publishToGithub(releaseInfo, version, project, repo, owner) {
   const publishResults = await releasePublish({
     projects: options.projects,
     outputStyle: 'static',
+    firstRelease: true,
   });
 
   process.exit(
